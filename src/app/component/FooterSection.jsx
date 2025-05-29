@@ -4,7 +4,7 @@ import { FaFacebookF, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 
 const FooterSection = () => {
   return (
-    <footer className="bg-[#f2efe4] text-[#2e5339] pt-16 pb-6 px-6">
+    <footer className="sm:mt-32   md:mt-48  bg-[#f2efe4] text-[#2e5339] pt-16 pb-6 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
 
         {/* Left: Logo and Description */}

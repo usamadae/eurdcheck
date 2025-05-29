@@ -18,7 +18,7 @@ const ContactSection = () => {
       </section>
 
       {/* Contact Card Section */}
-      <section className="relative -mt-48 w-full flex justify-center px-4">
+      <section className="relative    sm:-mt-0    md:-mt-48 w-full flex justify-center px-4">
         <div className="bg-white rounded-[20px] shadow-lg w-full max-w-6xl grid grid-cols-1 md:grid-cols-5 overflow-hidden p-3">
           {/* Left Contact Info */}
           <div className="bg-[#2E5339] text-white p-10 md:col-span-2 flex flex-col justify-center md:rounded-[30px]">
