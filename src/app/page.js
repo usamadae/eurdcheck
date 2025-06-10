@@ -12,6 +12,7 @@ export default function Home() {
          <HowItWorksSection />
          <FAQSection/>
          <ContactSection />
+         
          <FooterSection/>
       </main>
       

@@ -50,6 +50,7 @@ const HeroSection = () => {
               {fileName ? fileName : 'Drag & Drop or Click to Upload Files'}
             </p>
           </div>
+          
         </div>
 
         <div className="mt-6">

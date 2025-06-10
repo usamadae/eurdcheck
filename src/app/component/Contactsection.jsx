@@ -1,7 +1,11 @@
 'use client';
 import React from 'react';
-
+import { useState } from 'react';
+import Contactform from '../pages/Formtext'
+// import contact from '../pages/api/contact'
 const ContactSection = () => {
+  
+
   return (
     <>
       {/* Background Header Section */}
@@ -46,27 +50,8 @@ const ContactSection = () => {
 
           {/* Right Form */}
           <div className="p-8 md:col-span-3 bg-white">
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                <label className='text-[#353535] md:text-[18px] font-medium'>Your Name</label>
-                <input type="text" placeholder="Robin Sampson" className="border-b outline-none py-2" />
-
-                </div>
-                <div>
-
-                <label className='text-[#353535] md:text-[18px] font-medium'>Your Email</label><br></br>
-                <input type="email" placeholder="Robin@gmail.com" className="border-b outline-none py-2" />
-                </div>
-              </div>
-               <label className='text-[#353535] md:text-[18px] font-medium'>Your Subject</label>
-              <input type="text" placeholder="Lorem Ipsum is simply dummy" className="border-b outline-none w-full py-2" />
-               <label className='text-[#353535] md:text-[18px] font-medium'>Message</label>
-              <textarea placeholder="Write here your message" className="border-b outline-none w-full py-2 resize-none h-32" />
-              <button type="submit" className="bg-[#353535] text-white py-2 px-6 rounded-full hover:bg-[#24462f] transition-all">
-                Send Message
-              </button>
-            </form>
+          <Contactform/>
+  
           </div>
         </div>
       </section>
