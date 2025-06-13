@@ -1,13 +1,34 @@
 'use client';
 import { useState } from 'react';
 
-const HeroSection = () => {
+const HeroSection = ({ setFileUrl }) => {
   const [fileName, setFileName] = useState(null);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFileName(file.name);
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setFileName(file.name);
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch('http://localhost:5000/fileupload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        console.log('Uploaded:', data.fileUrl);
+        setFileUrl(data.fileUrl); // ✅ Pass URL to parent
+        alert('Upload successful!');
+      } else {
+        alert('Upload failed!');
+      }
+    } catch (err) {
+      alert('Something went wrong');
     }
   };
 
@@ -50,7 +71,6 @@ const HeroSection = () => {
               {fileName ? fileName : 'Drag & Drop or Click to Upload Files'}
             </p>
           </div>
-          
         </div>
 
         <div className="mt-6">

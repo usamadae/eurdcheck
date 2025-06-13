@@ -1,48 +1,48 @@
 'use client';
 import { useState } from 'react';
-function Formtext(){
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+
+function Formtext({ fileUrl }) {
+   const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const [status, setStatus] = useState('');
+
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Sending...');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, fileUrl }), // ✅ Include file URL
       });
-    
-      const [status, setStatus] = useState('');
-    
-      const handleChange = (e) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
-      };
-    
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setStatus('Sending...');  
 
-  try {
-    const response = await fetch('http://localhost:5000/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+      const data = await response.json();
 
-    const data = await response.json();
-     console.log('📥 Server Response:', data); 
-
-    if (response.ok) {
-        console.log('✅ Submitted Data:', formData);
-      setStatus('Message sent successfully!');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } else {
-      setStatus('Error: ' + (data.error || 'Unknown error'));
+      if (response.ok) {
+        setStatus('Message sent successfully!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('Error: ' + (data.error || 'Unknown error'));
+      }
+    } catch (error) {
+      setStatus('Error: ' + error.message);
     }
-  } catch (error) {
-    setStatus('Error: ' + error.message);
-  }
-};
+  };
 
-return(
-    <>
-       <form onSubmit={handleSubmit} className="space-y-6">
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className='text-[#353535] md:text-[18px] font-medium'>Your Name</label>
@@ -96,7 +96,7 @@ return(
 
       {status && <p className="mt-4">{status}</p>}
     </form>
-    </>
-);
+  );
 }
+
 export default Formtext;
